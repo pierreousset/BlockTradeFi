@@ -5,6 +5,7 @@ import { createWrapper } from "next-redux-wrapper";
 import transactionsReducer from './src/reducers/transactionsReducer';
 import balanceReducer from './src/reducers/walletReducer';
 import blockchainReducer from './src/reducers/blockchainReducer';
+import accountReducer from './src/reducers/accountReducer';
 
 // initial states here
 const initalState = {
@@ -17,7 +18,8 @@ const middleware = [thunk];
 const allReducers = combineReducers({
   balance: balanceReducer,
   transactions: transactionsReducer,
-  blockchain: blockchainReducer
+  blockchain: blockchainReducer,
+  account: accountReducer,
 })
 
 // creating store

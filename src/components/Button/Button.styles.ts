@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 type ColorList = {
   [key: string]: {
@@ -8,21 +8,21 @@ type ColorList = {
 };
 
 const colorList: ColorList = {
-  while: {
-    color: "#000",
-    backgroundColor: "#FFFFFF",
+  white: {
+    color: '#000',
+    backgroundColor: '#FFFFFF',
   },
   blue: {
-    color: "#FFFFFF",
-    backgroundColor: "#007bff",
+    color: '#FFFFFF',
+    backgroundColor: '#007bff',
   },
   red: {
-    color: "#FFFFFF",
-    backgroundColor: "#dc3545",
+    color: '#FFFFFF',
+    backgroundColor: '#dc3545',
   },
   green: {
-    color: "#FFFFFF",
-    backgroundColor: "#28a745",
+    color: '#FFFFFF',
+    backgroundColor: '#28a745',
   },
 };
 

@@ -102,7 +102,7 @@
 
     "no-plusplus": ["off", { "allowForLoopAfterthoughts": true }],
     "global-require": "off",
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "quotes": ["error", "single"],
     "object-property-newline": [
       "error",
       { "allowAllPropertiesOnSameLine": true }

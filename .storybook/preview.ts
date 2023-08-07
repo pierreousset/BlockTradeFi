@@ -1,6 +1,6 @@
-import { withThemeFromJSXProvider } from "@storybook/addon-styling";
-import { Global, css, ThemeProvider } from "@emotion/react";
-import { lightTheme } from "./themes";
+import { withThemeFromJSXProvider } from '@storybook/addon-styling';
+import { Global, css, ThemeProvider } from '@emotion/react';
+import { lightTheme } from './themes';
 
 export const decorators = [
   withThemeFromJSXProvider({
@@ -8,13 +8,13 @@ export const decorators = [
     themes: {
       light: lightTheme,
     },
-    defaultTheme: "light",
+    defaultTheme: 'light',
   }),
 ];
 
 const preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,

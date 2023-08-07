@@ -1,18 +1,18 @@
 // import axios from 'axios';
 // import Web3 from "web3";
-import { map } from "lodash";
+import { map } from 'lodash';
 import {
   Alchemy,
   AssetTransfersWithMetadataResult,
   Network,
   Utils,
   AssetTransfersCategory,
-} from "alchemy-sdk";
+} from 'alchemy-sdk';
 
-import { Action } from "redux";
-import { ThunkAction as ReduxThunkAction } from "redux-thunk";
+import { Action } from 'redux';
+import { ThunkAction as ReduxThunkAction } from 'redux-thunk';
 
-export type TActionType = "GET_NUMBER_TRANSACTIONS" | "CLOSE_TOAST";
+export type TActionType = 'GET_NUMBER_TRANSACTIONS' | 'CLOSE_TOAST';
 
 export interface IAction {
   type: TActionType;
@@ -27,7 +27,7 @@ export interface IGetRequestData {
 }
 
 export interface GetNumberTransactions extends IAction {
-  type: "GET_NUMBER_TRANSACTIONS";
+  type: 'GET_NUMBER_TRANSACTIONS';
   payload: IGetRequestData;
 }
 

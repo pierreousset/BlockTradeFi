@@ -1,13 +1,13 @@
 export const lightTheme = {
   colors: {
-    background: "#F6F9FC",
-    backgroundInverse: "#7A8997",
-    positive: "#E1FFD4",
-    negative: "#FEDED2",
-    primary: "#FF4785",
-    secondary: "#1EA7FD",
-    tertiary: "#DDDDDD",
-    text: "#222222",
+    background: '#F6F9FC',
+    backgroundInverse: '#7A8997',
+    positive: '#E1FFD4',
+    negative: '#FEDED2',
+    primary: '#FF4785',
+    secondary: '#1EA7FD',
+    tertiary: '#DDDDDD',
+    text: '#222222',
   },
   spacing: {
     padding: {
@@ -26,10 +26,10 @@ export const lightTheme = {
       code: '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
     },
     weight: {
-      regular: "400",
-      bold: "700",
-      extrabold: "800",
-      black: "900",
+      regular: '400',
+      bold: '700',
+      extrabold: '800',
+      black: '900',
     },
     size: {
       s1: 12,

@@ -1,5 +1,5 @@
 export type CardProps = {
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
   color?: "white" | "beige";
   css?: any;

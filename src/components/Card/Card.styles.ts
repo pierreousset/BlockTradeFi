@@ -1,21 +1,12 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 type ColorList = {
-  [key: string]: {
-    color: string;
-    backgroundColor: string;
-  };
+  [key: string]: string;
 };
 
 const colorList: ColorList = {
-  while: {
-    color: "#000",
-    backgroundColor: "#FFFFFF",
-  },
-  beige: {
-    color: "#000",
-    backgroundColor: "#F5F5DC",
-  },
+  white: '#FFFFFF',
+  beige: '#F5F5DC',
 };
 
 export const rootStyles = (color: string) => css`
@@ -24,6 +15,5 @@ export const rootStyles = (color: string) => css`
   border: 1px solid #dee3e0;
   border-radius: 4px;
   padding: 0 16px;
-  color: ${colorList[color]?.color};
-  background-color: ${colorList[color]?.backgroundColor};
+  background-color: ${colorList[color]};
 `;

@@ -1,9 +1,8 @@
-import { FC } from "react";
-import { rootStyles } from "./Button.styles";
-import { ButtonProps } from "./Button.d";
+import { FC } from 'react';
+import { rootStyles } from './Button.styles';
+import { ButtonProps } from './Button.d';
 
-const Button: FC<ButtonProps> = ({ onClick, children, color = "white" }) => {
-  console.log("Button rendered", color);
+const Button: FC<ButtonProps> = ({ onClick, children, color = 'white' }) => {
   return (
     <button css={rootStyles(color)} onClick={onClick}>
       {children}
@@ -11,4 +10,4 @@ const Button: FC<ButtonProps> = ({ onClick, children, color = "white" }) => {
   );
 };
 
-export default Button; // Add this line to export the component
+export default Button;

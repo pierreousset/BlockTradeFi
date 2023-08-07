@@ -14,8 +14,6 @@ import React from "react";
 const TableAsset = ({ assetList }: { assetList: Array<any> }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  console.log(assetList);
-
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-8">
       <div className="max-w-lg">

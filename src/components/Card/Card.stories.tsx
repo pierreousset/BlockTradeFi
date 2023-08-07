@@ -1,8 +1,8 @@
-import { css } from "@emotion/react";
-import Card from "./Card";
+import { css } from '@emotion/react';
+import Card from './Card';
 
 export default {
-  title: "Components/Card",
+  title: 'Components/Card',
   component: Card,
 };
 

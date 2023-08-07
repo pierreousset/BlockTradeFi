@@ -1,39 +1,32 @@
 // import axios from 'axios';
-// import Web3 from "web3";
-import { map } from "lodash";
+import Web3 from 'web3';
+import { map } from 'lodash';
 import {
-  Alchemy,
   AssetTransfersWithMetadataResult,
-  Network,
-  Utils,
   AssetTransfersCategory,
-} from "alchemy-sdk";
-import { ThunkAction, GetNumberTransactions } from "./transactionsActions";
+} from 'alchemy-sdk';
+import { alchemy, utils } from 'services/alchemy';
+import { ThunkAction, GetNumberTransactions } from './transactionsActions';
 
 export const setTransactions = (count: any) => ({
-  type: "SET_TRANSACTIONS",
+  type: 'SET_TRANSACTIONS',
   count,
 });
 
 export const setTransactionHistory = (
   transactionHistory: AssetTransfersWithMetadataResult[]
 ) => ({
-  type: "SET_TRANSACTION_HISTORY",
+  type: 'SET_TRANSACTION_HISTORY',
   transactionHistory,
 });
 
-export const setBalance = (balance: string) => ({
-  type: "SET_BALANCE",
-  balance,
-});
-
 export const setGasPrice = (gasPrice: string) => ({
-  type: "SET_GAS_PRICE",
+  type: 'SET_GAS_PRICE',
   gasPrice,
 });
 
 export const setAllToken = (data: any) => ({
-  type: "SET_ALL_TOKEN",
+  type: 'SET_ALL_TOKEN',
   data,
 });
 
@@ -61,14 +54,7 @@ export const setAllToken = (data: any) => ({
 //   }
 // };
 
-const settings = {
-  apiKey: "AUiqazTkl3_ensLZSiNTpu59_XvxYgx-", // Replace with your Alchemy API key.
-  network: Network.ETH_MAINNET, // Replace with your network.
-};
-
-const alchemy = new Alchemy(settings);
-
-export const fetchNumberTransactions =
+export const getTransactionsHistory =
   (address: string): ThunkAction<GetNumberTransactions> =>
   async (
     dispatch: (arg0: { type: string; transactionHistory: any }) => void
@@ -76,7 +62,8 @@ export const fetchNumberTransactions =
     try {
       await alchemy.core
         .getAssetTransfers({
-          fromBlock: "0x0",
+          fromBlock: '0x0',
+          toBlock: 'latest',
           fromAddress: address,
           category: [
             AssetTransfersCategory.EXTERNAL,
@@ -90,20 +77,7 @@ export const fetchNumberTransactions =
           dispatch(setTransactionHistory(result.transfers));
         });
     } catch (error) {
-      console.error("Error fetching transactions:", error);
-    }
-  };
-
-export const fetchBalance =
-  (address: string | Promise<string>) =>
-  async (dispatch: (arg0: { type: string; balance: any }) => void) => {
-    try {
-      alchemy.core.getBalance(address, "latest").then((result) => {
-        const balance = Utils.formatUnits(result, "ether");
-        dispatch(setBalance(balance));
-      });
-    } catch (error) {
-      console.error("Error fetching transactions:", error);
+      console.error('Error fetching transactions:', error);
     }
   };
 
@@ -111,50 +85,82 @@ export const getGasPrice =
   () => async (dispatch: (arg0: { type: string; gasPrice: any }) => void) => {
     try {
       alchemy.core.getGasPrice().then((result) => {
-        const balance = Utils.formatUnits(result, "wei");
+        const balance = utils.formatUnits(result, 'wei');
         dispatch(setGasPrice(balance));
       });
     } catch (error) {
-      console.error("Error fetching transactions:", error);
+      console.error('Error fetching transactions:', error);
     }
   };
 
 export const getAllToken =
-  (contract: string) =>
+  (address: string) =>
   async (dispatch: (arg0: { type: string; data: any }) => any) => {
     try {
+      const tokenContractAddresses = [
+        '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+      ];
       // Get token balances
-      const balances = await alchemy.core.getTokenBalances(contract);
+      const balances = await alchemy.core.getTokenBalances(
+        address,
+        tokenContractAddresses
+      );
 
+      const metadata = await alchemy.core.getTokenMetadata(
+        '0xdAC17F958D2ee523a2206206994597C13D831ec7'
+      );
       // Remove tokens with zero balance
-      const nonZeroBalances = balances.tokenBalances.filter((token) => {
-        return token.tokenBalance !== "0";
-      });
+      // const nonZeroBalances = balances.tokenBalances.filter((token) => {
+      //   return token.tokenBalance !== "0";
+      // });
 
-      // Counter for SNo of final output
-      let i = 1;
+      // // Counter for SNo of final output
+      // let i = 1;
 
-      const balanceTokenList = [];
+      // const balanceTokenList = [];
 
       // Loop through all tokens with non-zero balance
-      for (let token of nonZeroBalances) {
-        // Get balance of token
-        let balance = token.tokenBalance;
+      // for (let token of nonZeroBalances) {
+      //   // Get balance of token
+      //   let balance = token.tokenBalance;
 
-        // Get metadata of token
-        const metadata = await alchemy.core.getTokenMetadata(
-          token.contractAddress
-        );
+      //   // Get metadata of token
+      //   const metadata = await alchemy.core.getTokenMetadata(
+      //     token.contractAddress
+      //   );
 
-        // Compute token balance in human-readable format
-        balance = balance / Math.pow(10, metadata.decimals);
-        balance = balance.toFixed(2);
+      //   // Compute token balance in human-readable format
+      //   balance = balance / Math.pow(10, metadata.decimals);
+      //   balance = balance.toFixed(7);
+      //   console.log(balance);
 
-        balanceTokenList.push({ ...metadata, balance: balance });
-      }
-      dispatch(setAllToken(balanceTokenList));
+      //   balanceTokenList.push({ ...metadata, balance: balance });
+      // }
+
+      // console.log("autre", balances.tokenBalances[0].tokenBalance);
+
+      // const metadata = await alchemy.core.getTokenMetadata(
+      //   balances.tokenBalances[0].contractAddress
+      // );
+
+      // const tokenName = metadata.name + "(" + metadata.symbol + ")";
+      // const tokenBalance =
+      //   balances.tokenBalances[0].tokenBalance /
+      //   Math.pow(10, metadata.decimals);
+
+      // // console.log("Token balance for", tokenName, "is", tokenBalance);
+
+      // parseInt(balances.tokenBalances[0].tokenBalance, 16);
+      // console.log(
+      //   "Token balance foriii address\n",
+      //   parseInt(balances.tokenBalances[0].tokenBalance, 16)
+      // );
+
+      const balance = await alchemy.core.getBalance(address, 'latest');
+
+      dispatch(setAllToken({ count: utils.formatEther(balance) }));
     } catch (error) {
-      console.error("Error fetching transactions:", error);
+      console.error('Error fetching transactions:', error);
     }
   };
 
@@ -181,3 +187,7 @@ export const getAllToken =
 
 //   Promise.all(tokentList).then((data) => dispatch(setAllToken(data)));
 // });
+
+export default {
+  getTransactionsHistory,
+};
